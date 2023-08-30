@@ -1,0 +1,5 @@
+__pycache__/
+.env
+.idea/
+ env_shool/
+output.log
