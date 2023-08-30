@@ -36,13 +36,13 @@ class HelperConversationChain(LLMChain):
         llm: BaseChatModel,
         verbose: bool = True,
         use_custom_prompt: bool = False,
-        custom_prompt: str = "You are an AI Sales agent, sell me this pencil",
+        custom_prompt: str = "You are an AI agent, sell me this pencil",
     ) -> LLMChain:
         """Get the response parser."""
         if use_custom_prompt:
-            sales_agent_inception_prompt = custom_prompt
+            helper_agent_inception_prompt = custom_prompt
             prompt = PromptTemplate(
-                template=sales_agent_inception_prompt,
+                template=helper_agent_inception_prompt,
                 input_variables=[
                     "helper_person_name",
                     "helper_person_role",

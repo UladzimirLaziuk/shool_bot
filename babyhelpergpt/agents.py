@@ -34,15 +34,15 @@ def _create_retry_decorator(llm: Any) -> Callable[[Any], Any]:
 
 
 class BabyChatGPT(Chain):
-    """Controller model for the Sales Agent."""
+    """Controller model for the Agent."""
 
     conversation_history: List[str] = []
     conversation_stage_id: str = "1"
     current_conversation_stage: str = CONVERSATION_STAGES.get("1")
     stage_analyzer_chain: StageAnalyzerChain = Field(...)
-    helper_agent_executor: Union[AgentExecutor, None] = Field(...)#sales_agent_executor
+    helper_agent_executor: Union[AgentExecutor, None] = Field(...)#agent_executor
     knowledge_base: Union[RetrievalQA, None] = Field(...)
-    helper_conversation_utterance_chain: HelperConversationChain = Field(...)#sales_conversation_utterance_chain
+    helper_conversation_utterance_chain: HelperConversationChain = Field(...)#conversation_utterance_chain
     conversation_stage_dict: Dict = CONVERSATION_STAGES
 
     use_tools: bool = False
@@ -160,7 +160,7 @@ class BabyChatGPT(Chain):
     @time_logger
     def _streaming_generator(self, model_name="gpt-3.5-turbo-0613"):
         """
-        Sometimes, the sales agent wants to take an action before the full LLM output is available.
+        Sometimes, the agent wants to take an action before the full LLM output is available.
         For instance, if we want to do text to speech on the partial LLM output.
 
         This function returns a streaming generator which can manipulate partial output from an LLM
@@ -200,7 +200,7 @@ class BabyChatGPT(Chain):
         Asynchronous generator to reduce I/O blocking when dealing with multiple
         clients simultaneously.
 
-        Sometimes, the sales agent wants to take an action before the full LLM output is available.
+        Sometimes, the agent wants to take an action before the full LLM output is available.
         For instance, if we want to do text to speech on the partial LLM output.
 
         This function returns a streaming generator which can manipulate partial output from an LLM
@@ -229,7 +229,7 @@ class BabyChatGPT(Chain):
     def _call(self,
         inputs: Dict[str, Any],
         run_manager: Optional[CallbackManagerForChainRun] = None   ) -> Dict[str, Any]:
-        """Run one step of the sales agent."""
+        """Run one step of the agent."""
 
         # Generate agent's utterance
         # if use tools
@@ -272,7 +272,7 @@ class BabyChatGPT(Chain):
     async def _acall(self,
         inputs: Dict[str, Any],
         run_manager: Optional[CallbackManagerForChainRun] = None   ) -> Dict[str, Any]:
-        """Run one step of the sales agent."""
+        """Run one step of the agent."""
 
         # Generate agent's utterance
         # if use tools
@@ -315,7 +315,7 @@ class BabyChatGPT(Chain):
     @classmethod
     @time_logger
     def from_llm(cls, llm: BaseLLM, verbose: bool = False, **kwargs) -> "BabyChatGPT":
-        """Initialize the SalesGPT Controller."""
+        """Initialize the GPT Controller."""
         stage_analyzer_chain = StageAnalyzerChain.from_llm(llm, verbose=verbose)
         if (
             "use_custom_prompt" in kwargs.keys()
@@ -398,7 +398,7 @@ class BabyChatGPT(Chain):
     @classmethod
     @time_logger
     def from_llm_my(cls, llm: BaseChatModel, llm_analizer: BaseChatModel, verbose: bool = False, **kwargs) -> "BabyChatGPT":
-        """Initialize the SalesGPT Controller."""
+        """Initialize the GPT Controller."""
         stage_analyzer_chain = StageAnalyzerChain.from_llm(llm=llm_analizer, verbose=verbose)
         if (
                 "use_custom_prompt" in kwargs.keys()
