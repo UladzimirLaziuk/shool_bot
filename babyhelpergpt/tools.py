@@ -4,7 +4,7 @@ from langchain.chains import RetrievalQA
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import Chroma
+# from langchain.vectorstores import Chroma
 
 
 def setup_knowledge_base(product_catalog: str = None):
@@ -45,7 +45,7 @@ def get_tools(knowledge_base):
     # we only use one tool for now, but this is highly extensible!
     tools = [
         Tool(
-            name="ProductSearch",
+            name="GameSearch",
             func=knowledge_base.run,
             description="useful for when you need to answer questions about product information",
         )

@@ -9,7 +9,5 @@ CONVERSATION_STAGES = {
     "5": "Presentation of the game: Based on the answers, present your game to him as a solution to the lack of interesting moments in learning. Describe the game and its purpose as colorfully as possible. BE SURE TO WRITE THE SEQUENCE OF ACTION IN THE GAME.",
     "6": "The game itself: Play by the rules of the game. Questions should be asked in such a way that the child wants to continue to play and develop along with the game. QUESTIONS AND YOUR TEXT SHOULD BE COLORED AND FIGURATIVE, THIS IS MANDATORY. Be attentive to the answers, try to correct the child in his answers very gently and delicately.",
     "7":"End of game:You should summarize your game by noting what results the child has achieved-try to praise him for his desire to learn.",
-    # "6": "Objection handling: Address any objections that the prospect may have regarding your product/service. Be prepared to provide evidence or testimonials to support your claims.",
-    # "7": "Close: Ask for the sale by proposing a next step. This could be a demo, a trial or a meeting with decision-makers. Ensure to summarize what has been discussed and reiterate the benefits.",
     "8": "End the conversation: it's time to end the conversation, make it fun and relaxed so that the child wants to play with you again.Thank the child."
 }

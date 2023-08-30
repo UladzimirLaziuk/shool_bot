@@ -46,13 +46,13 @@ class BabyChatGPT(Chain):
     conversation_stage_dict: Dict = CONVERSATION_STAGES
 
     use_tools: bool = False
-    helper_person_name: str = "Ted Lasso"
+    helper_person_name: str = "John"
     helper_person_role: str = "A kind cheerful helper for children"
     company_name: str = "Cloud Teacher"
     company_business: str = "Cloud Teacher - мы помогаем детям играть в различные игры, чтобы обучение проходило легко и весело. "
     company_values: str = "Наша миссия в Cloud Teacher - помочь детям лучше учиться, предлагая увлекательные игры для повышения эффективности обучения. Мы считаем, что веселые игры - это ключ к хорошей успеваемости и общему усвоению урока, и стремимся помочь детям достичь оптимального уровня обучения, составляя игры для выполнения домашних заданий."
     # conversation_purpose: str = "find out whether they are looking to achieve better sleep via buying a premier mattress."
-    conversation_type: str = "call"
+    conversation_type: str = "write"
 
     def retrieve_conversation_stage(self, key):
         return self.conversation_stage_dict.get(key, "1")
