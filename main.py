@@ -27,41 +27,6 @@ async def get(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-prompt_template = """Из следующего запроса выдели данные следующего формата:
-паспорт, серия и его номер номер, номер идентификационный, Фамилию, Имя, Отчество.
-Если чего то нет из этого то напиши чего не хватает.
-Ничего не выдумывай и не дописывай.
-Ответ должен быть как в примерах.
-дай ответ по примеру:
-Текст: вот мой паспорт его серия мс 19789234, идентификационный 1236738342, Пулихин Гит Мержевич
-Ответ: Серия паспорта {{ мс }} номер {{ 19789234 }} идентификационный номер {{ 1236738342 }} Фамилия {{ Пулихин }} Имя {{ Гит }} Отчество {{  Мержевич }}
-Текст: паспорт мс 231134554, номер идентификационный 67534324, Федор Амиран
-Ответ: Серия паспорта {{ мс }} номер {{ 19789234 }} идентификационный номер {{ 1236738342 }} Фамилия {{ Амиран }} Имя {{ Федор }} Отчество {{ }}
-
-Конец примеров
-Начало:
-Текст:{question}
-Ответ:
-"""
-def get_chain_request(
-    stream_handler, tracing: bool = False, c=None,
-) :
-
-    streaming_llm = OpenAI(
-        streaming=True,
-        callbacks=[stream_handler],
-        verbose=True,
-        temperature=0.2,
-    )
-
-    PROMPT = PromptTemplate(
-        template=prompt_template, input_variables=["question"]
-    )
-
-
-    chain = LLMChain(llm=streaming_llm, prompt=PROMPT)
-    return chain
-
 @app.websocket("/chat")
 async def websocket_endpoint(websocket: WebSocket):
 
